@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.OptionalDouble;
@@ -74,20 +75,47 @@ public class App {
                         .salario(4500)
                         .build());
 
-            // 4 b)
+        // 4 b)
 
-            // Calcular el salario promedio
+        // Calcular el salario promedio
 
-            OptionalDouble salarioPromedioOptional = empleados.stream().mapToDouble(Empleado::getSalario).average();
+        OptionalDouble salarioPromedioOptional = empleados.stream().mapToDouble(Empleado::getSalario).average();
 
-            final double salarioPromedio = salarioPromedioOptional.getAsDouble();
+        final double salarioPromedio = salarioPromedioOptional.getAsDouble();
 
-            empleados.stream()
-                .filter(empleado -> empleado.getSalario() > salarioPromedio && 
-                            empleado.getGenero().equals(Genero.MUJER))
+        empleados.stream()
+                .filter(empleado -> empleado.getSalario() > salarioPromedio &&
+                        empleado.getGenero().equals(Genero.MUJER))
                 .forEach(System.out::println);
 
-            // 5 a) 
-            
+        // 5 a)
+
+        // 6 a) y b)
+
+        List<? super Persona> listaDeEmpYEstudiantes = new ArrayList<>();
+
+        listaDeEmpYEstudiantes.add(Empleado.builder().nombre("Manuel").genero(Genero.HOMBRE)
+                .departamento(Departamento.INFORMATICA).salario(1200.5).build());
+
+        listaDeEmpYEstudiantes.add(Estudiante.builder().nombre("Violeta").genero(Genero.MUJER)
+                .facultad(Facultad.FILOSOFIA).totalAsignaturasMatriculadas(8).build());
+
+        listaDeEmpYEstudiantes.add(Empleado.builder().nombre("Pedro").genero(Genero.HOMBRE)
+                .departamento(Departamento.INFORMATICA).salario(1200.5).build());
+
+        listaDeEmpYEstudiantes.add(Estudiante.builder().nombre("Veronica").genero(Genero.MUJER)
+                .facultad(Facultad.FILOSOFIA).totalAsignaturasMatriculadas(9).build());
+
+        listaDeEmpYEstudiantes.add(Empleado.builder().nombre("Samuel").genero(Genero.HOMBRE)
+                .departamento(Departamento.INFORMATICA).salario(1200.5).build());
+
+        listaDeEmpYEstudiantes.add(Estudiante.builder().nombre("Andrea").genero(Genero.MUJER)
+                .facultad(Facultad.FILOSOFIA).totalAsignaturasMatriculadas(10).build());
+
+        
+
+
+
+        
     }
 }
