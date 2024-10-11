@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class Persona {
     private String nombre;
-    private String primerAepllido;
+    private String primerApellido;
     private String segundoApellido;
     private Genero genero;
 }
