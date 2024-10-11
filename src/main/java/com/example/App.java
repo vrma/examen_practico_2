@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.OptionalDouble;
+import java.util.stream.Collectors;
 
 public class App {
     public static void main(String[] args) {
@@ -112,10 +113,37 @@ public class App {
         listaDeEmpYEstudiantes.add(Estudiante.builder().nombre("Andrea").genero(Genero.MUJER)
                 .facultad(Facultad.FILOSOFIA).totalAsignaturasMatriculadas(10).build());
 
-        
+        // 7 a)
 
+        // Primero calculamos la media de las asignaturas
+        OptionalDouble mediaAsignaturasOptional = listaDeEmpYEstudiantes.stream()
+                .filter(objeto -> objeto instanceof Estudiante)
+                .mapToDouble(objeto -> ((Estudiante) objeto).getTotalAsignaturasMatriculadas())
+                .average();
 
+        final double mediaAsignaturasMatriculadas = mediaAsignaturasOptional.getAsDouble();
 
-        
+        // Solucion final al punto a
+
+        // Si pudieses utilizar la palabra reservada var
+        // la solucion siguiente estaria estupenda (a partir de Java 11)
+        var estudiantesMujer = listaDeEmpYEstudiantes.stream()
+                .filter(obj -> obj instanceof Estudiante estudiante &&
+                        estudiante.getGenero().equals(Genero.MUJER) &&
+                        estudiante.getTotalAsignaturasMatriculadas() >= mediaAsignaturasMatriculadas)
+                .collect(Collectors.toList());
+
+        // Estas en una empresa donde no puedes utilizar var, porque utilizan Jav 8
+
+        List<Estudiante> estudiantesMujerSinPoderUsarVar = listaDeEmpYEstudiantes.stream()
+                .filter(obj -> obj instanceof Estudiante estudiante &&
+                        estudiante.getGenero().equals(Genero.MUJER) &&
+                        estudiante.getTotalAsignaturasMatriculadas() >= mediaAsignaturasMatriculadas)
+                .map(objeto -> ((Estudiante) objeto))
+                .collect(Collectors.toList());
+    
+    
+        System.out.println(estudiantesMujerSinPoderUsarVar);
+
     }
 }
